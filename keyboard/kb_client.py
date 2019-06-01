@@ -7,6 +7,7 @@
 # Adapted from www.linuxuser.co.uk/tutorials/emulate-a-bluetooth-keyboard-with-the-raspberry-pi
 #
 #
+from __future__ import print_function
 import os #used to all external commands
 import sys # used to exit the script
 import dbus
@@ -46,14 +47,14 @@ class Keyboard():
 			0x00,
 			0x00]
 
-		print "setting up DBus Client"	
+		print("setting up DBus Client")
 
 		self.bus = dbus.SystemBus()
 		self.btkservice = self.bus.get_object('org.yaptb.btkbservice','/org/yaptb/btkbservice')
 		self.iface = dbus.Interface(self.btkservice,'org.yaptb.btkbservice')	
 
 
-		print "waiting for keyboard"
+		print("waiting for keyboard")
 
 		#keep trying to key a keyboard
 		have_dev=False
@@ -64,9 +65,9 @@ class Keyboard():
 				self.dev = InputDevice("/dev/input/event0")
 				have_dev=True
 			except OSError:
-				print "Keyboard not found, waiting 3 seconds and retrying"
+				print("Keyboard not found, waiting 3 seconds and retrying")
 				time.sleep(3)
-			print "found a keyboard"
+			print("found a keyboard")
 		
 
 
@@ -120,10 +121,10 @@ class Keyboard():
 
 if __name__ == "__main__":
 
-	print "Setting up keyboard"
+	print("Setting up keyboard")
 
 	kb = Keyboard()
 
-	print "starting event loop"
+	print("starting event loop")
 	kb.event_loop()
 

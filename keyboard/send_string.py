@@ -1,4 +1,4 @@
-
+from __future__ import print_function
 import os #used to all external commands
 import sys # used to exit the script
 import dbus
@@ -53,7 +53,7 @@ class BtkStringClient():
 
                 
             #connect with the Bluetooth keyboard server    
-            print "setting up DBus Client"  
+            print("setting up DBus Client")
 
             self.bus = dbus.SystemBus()
             self.btkservice = self.bus.get_object('org.yaptb.btkbservice','/org/yaptb/btkbservice')
@@ -101,7 +101,7 @@ class BtkStringClient():
 			else:
 			        scantablekey = "KEY_"+c.upper()
 
-			print scantablekey
+			print(scantablekey)
 
 			scancode = keymap.keytable[scantablekey]
 			self.send_key_down(scancode)
@@ -116,20 +116,20 @@ if __name__ == "__main__":
  
 	
     if(len(sys.argv) <2):
-	print "Usage: send_string <string to send "
+	print("Usage: send_string <string to send ")
 	exit()        
 
-    print "Setting up GPIO Bluetooth kb emulator client"
+    print("Setting up GPIO Bluetooth kb emulator client")
 
     dc = BtkStringClient()
 
     string_to_send = sys.argv[1]
 
-    print "Sending " + string_to_send
+    print("Sending " + string_to_send)
 
     dc.send_string(string_to_send)
 
-    print "Done."	
+    print("Done.")
 
 
     

@@ -164,10 +164,10 @@ class BTKbDevice():
         self.sinterrupt.listen(1)
 
         self.ccontrol,cinfo = self.scontrol.accept()
-        print ("Got a connection on the control channel from " + cinfo[0])
+        print("Got a connection on the control channel from " + cinfo[0])
 
         self.cinterrupt, cinfo = self.sinterrupt.accept()
-        print ("Got a connection on the interrupt channel from " + cinfo[0])
+        print("Got a connection on the interrupt channel from " + cinfo[0])
 
 
     #send a string to the bluetooth host machine
