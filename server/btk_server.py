@@ -27,14 +27,12 @@ import dbus
 class BTKbBluezProfile(dbus.service.Object):
 	fd = -1
 
-	@dbus.service.method("org.bluez.Profile1",
-			     in_signature="", out_signature="")
+	@dbus.service.method("org.bluez.Profile1", in_signature="", out_signature="")
 	def Release(self):
 		print("Release")
 		mainloop.quit()
 
-	@dbus.service.method("org.bluez.Profile1",
-			     in_signature="", out_signature="")
+	@dbus.service.method("org.bluez.Profile1", in_signature="", out_signature="")
 	def Cancel(self):
 		print("Cancel")
 
@@ -122,15 +120,8 @@ class BTKbDevice():
 
 	# read and return an sdp record from a file
 	def read_sdp_service_record(self):
-
 		print("Reading service record")
-
-		try:
-			fh = open(BTKbDevice.SDP_RECORD_PATH, "r")
-		except:
-			sys.exit("Could not open the sdp record. Exiting...")
-
-		return fh.read()
+		return open(BTKbDevice.SDP_RECORD_PATH, "r").read()
 
 	# listen for incoming client connections
 
@@ -177,10 +168,10 @@ class BTKbService(dbus.service.Object):
 		dbus.service.Object.__init__(self, bus_name, "/org/yaptb/btkbservice")
 
 		# create and setup our device
-		self.device = BTKbDevice();
+		self.device = BTKbDevice()
 
 		# start listening for connections
-		self.device.listen();
+		self.device.listen()
 
 	@dbus.service.method('org.yaptb.btkbservice', in_signature='yay')
 	def send_keys(self, modifier_byte, keys):
@@ -197,7 +188,7 @@ class BTKbService(dbus.service.Object):
 				cmd_str += chr(key_code)
 			count += 1
 
-		self.device.send_string(cmd_str);
+		self.device.send_string(cmd_str)
 
 
 # main routine
@@ -207,5 +198,4 @@ if __name__ == "__main__":
 		sys.exit("Only root can run this script")
 
 	DBusGMainLoop(set_as_default=True)
-	myservice = BTKbService();
-
+	myservice = BTKbService()

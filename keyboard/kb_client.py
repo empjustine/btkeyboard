@@ -88,7 +88,7 @@ class Keyboard():
 				elif self.state[i] == 0x00 and event.value == 1:
 					# if the current space if empty and the key is being pressed
 					self.state[i] = hex_key
-					break;
+					break
 
 	# poll for keyboard events
 	def event_loop(self):
